@@ -1,0 +1,19 @@
+<h1>Edit data</h1>
+<br>
+
+<form class=""  method="post">
+{% csrf_token %}
+<label for="">Guest Name</label><br>
+{{form.guest_name}}
+<br>
+<br>
+<label for="">Guest Number</label><br>
+{{form.mobile_number}}
+<br>
+<br>
+<label for="">Guest member</label><br>
+{{form.total_member}}
+<br>
+<br>
+<button type="submit" name="button">Save Data</button>
+</form>

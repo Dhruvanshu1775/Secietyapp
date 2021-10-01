@@ -1,0 +1,39 @@
+<h1>Hello {{request.user}} of {{request.user.member.house_key}}</h1>
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+<body>
+
+<br>
+<a href="{% url 'guest' %}">Logout</a>
+<br>
+
+
+<table style="width:50%">
+  <tr>
+    <th>Sr.No</th>
+    <th>Guest Name</th>
+    <th>Guest Type</th>
+    <th>Guest Purpose</th>
+    <th>Guest Number</th>
+    <th>Guest Total number</th>
+    <th>Date/Time</th>
+    <th>Action</th>
+  </tr>
+  {% for obj in request.user.specikey.all %}
+  <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{obj.guest_name}}</td>
+    <td>{{obj.guestcategory_key}}</td>
+    <td>{% if not obj.purpose %} N.G.{% else %} {{obj.purpose}} {% endif %}</td>
+    <td>{% if not obj.mobile_number %} N.G.{% else %} {{obj.mobile_number}}{% endif %}</td>
+    <td>{% if not obj.total_member %} N.G. {% else %} {{obj.total_member}} {% endif %}</td>
+    <td>{{obj.create_at|date:'d M y / H:i a'}}</td>
+    <td> <a href="#">Delete</a> </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<br>

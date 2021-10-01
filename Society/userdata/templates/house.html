@@ -1,0 +1,38 @@
+<h1>Create House No for member</h1>
+<br>
+<br>
+<br>
+<form class=""  method="post">
+    {% csrf_token %}
+    <label for="">{{form.number.label}}</label><br>
+    {{form.number}}<br>
+    <button type="submit" name="button">Create House</button>
+</form>
+<br>
+<br>
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+<body>
+
+<h2>A basic HTML table</h2>
+
+<table style="width:50%">
+  <tr>
+    <th>Sr.No</th>
+    <th>House No</th>
+    <th>Total Member</th>
+    <th>Action</th>
+  </tr>
+  {% for obj in house %}
+  <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{obj.number}}</td>
+    <td>{{obj.member_set.count}}</td>
+    <td><a href="{% url 'assignmember' obj.slug %}">Assign house member</a> </td>
+  </tr>
+  {% endfor %}
+
+</table>

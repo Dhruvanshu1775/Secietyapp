@@ -1,0 +1,86 @@
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<h1>Add Guest data</h1>
+<br>
+<a href="{% url 'logout' %}">Logout</a>
+
+<br>
+<br>
+<form class="" action="" method="post">
+    {% csrf_token %}
+    <label for="">Select House No</label><br>
+    {{form.house_key}}<br>
+    <br>
+    <label for="">Select Guest Category</label><br>
+    {{form.guestcategory_key}}<br><br>
+    <label for="">Special Person</label><br>
+    {{form.special_key}}<br><br>
+    <label for="">{{form.guest_name.label}}</label><br>
+    {{form.guest_name}}<br><br>
+    <label for="">{{form.total_member.label}}</label><br>
+    {{form.total_member}}<br><br>
+    <label for="">{{form.mobile_number.label}}</label><br>
+    {{form.mobile_number}}<br><br>
+    <label for="">{{form.purpose.label}}</label><br>
+    {{form.purpose}}<br><br>
+
+
+
+
+    <button type="submit" name="button">Create Entry</button>
+
+</form>
+<br>
+<br>
+<br>
+<h1>Home Data</h1>
+<br>
+<br>
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+<body>
+<br>
+<form class="" action="" method="get">
+    <input type="text" name="search" id="searchdata" value="" placeholder="Search House">
+    <button type="submit">Search House</button>
+</form>
+
+<table style="width:80%">
+  <tr>
+    <th>Sr.No</th>
+    <th>House No</th>
+    <th>Total Entry</th>
+    <th>Entry</th>
+  </tr>
+  {% for obj in house %}
+  <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{obj.number}}</td>
+    <td>{{obj.gkey.all.count}}</td>
+    <td><a href="{% url 'houseguest' obj.slug %}">View Entry</a> </td>
+  </tr>
+  {% endfor %}
+
+</table>
+
+<script type="text/javascript">
+    $(document).on("keyup", "#searchdata",function(){
+        var jj = $(this).val()
+        $.ajax({
+            url:'{% url "guest" %}',
+            method:'GET',
+            data:{
+                'search':jj,
+            },
+            success:function(data){
+
+            },
+            error:function(data){
+
+            },
+        })
+    })
+</script>
